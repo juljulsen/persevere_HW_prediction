@@ -64,7 +64,7 @@ def loadData(dir):
 ### my version
 def loadONI(dir):
     _df = pd.read_table(dir, header = 1, sep = " ")
-    _oni = np.array(df[df.keys()[-3]])
+    _oni = np.array(_df[_df.keys()[-3]])
     return np.repeat(_oni, reps)
 
 
