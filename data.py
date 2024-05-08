@@ -12,14 +12,13 @@ path = './datapackage/'
 filePath = glob(path+'*.mat')
 filePath.sort()
 
+### these variables are to include oni file in my version of loadONI
 pathONI = './ONI.txt'
-
-
 days_of_month = [31,28,31,30,31,30,31,31,30,31,30,31]
 days_of_month_leap = [31,29,31,30,31,30,31,31,30,31,30,31]
 leap = [2004, 2008, 2012, 2016, 2020]
-reps = []
-for i in range(2000,2021):
+reps = []   ##used for repeating the ONI values
+for i in range(2006,2021):
     if i in leap: reps += days_of_month_leap
     else: reps += days_of_month
 
@@ -56,13 +55,17 @@ def loadData(dir):
     _feature.append(_data['DOY'].squeeze())
     return np.array(_location),np.array(_feature)
 
+
+### original Version
 #def loadONI(dir):
 #    _data = loadmat(dir)
 #    return np.array(_data['ONI_d'].squeeze())
+    
+### my version
 def loadONI(dir):
-    _df = pd.read_table(dir, header = 1)
-    _df
-    return np.array(_data['ONI_d'].squeeze())
+    _df = pd.read_table(dir, header = 1, sep = " ")
+    _oni = np.array(df[df.keys()[-3]])
+    return np.repeat(_oni, reps)
 
 
 def createGraph(sequence,selfConn=True,thres=0.4,scaledWeights=True):
@@ -140,8 +143,8 @@ class FTGenerator(object):
         _raw = _rawNew.copy()
 
         ## Adding ONI as a global influence feature
-        #_oni = loadONI('../../Data/ONI.mat')
-        _oni = loadONI(pathONI)
+        #_oni = loadONI('../../Data/ONI.mat')   ### orig version
+        _oni = loadONI(pathONI)  ### my version
         _nSteps,_nNodes,_nFeatures = _raw.shape
         _rawNew = np.zeros((_nSteps,_nNodes,_nFeatures+1))
         _rawNew[:,:,:-1] = _raw.copy()
