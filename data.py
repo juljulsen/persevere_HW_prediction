@@ -63,8 +63,8 @@ def loadData(dir):
     
 ### my version
 def loadONI(dir):
-    _df = pd.read_table(dir, header = 1, sep = " ")
-    _oni = np.array(_df[_df.keys()[-3]])
+    _df = pd.read_table(dir, header = 1, sep = r"\s+")
+    _oni = np.array(_df["ONI"])
     return np.repeat(_oni, reps)
 
 
@@ -145,6 +145,7 @@ class FTGenerator(object):
         ## Adding ONI as a global influence feature
         #_oni = loadONI('../../Data/ONI.mat')   ### orig version
         _oni = loadONI(pathONI)  ### my version
+        #print("This is loaded as ONI:", _oni)
         _nSteps,_nNodes,_nFeatures = _raw.shape
         _rawNew = np.zeros((_nSteps,_nNodes,_nFeatures+1))
         _rawNew[:,:,:-1] = _raw.copy()
@@ -212,6 +213,7 @@ class FTGenerator(object):
             _feature = np.transpose(_normData[_n:_n+self.Cin,:,self.featureIdx],(1,0,2)).reshape(_nNodes,-1)
             _target = _normData[_n+self.Cin:_n+self.Cin+self.Cout,:,0].T
             _FT[_n],_TG[_n] = _feature,_target
+        #print(np.shape(_FT))
         return _FT,_TG,_edgeIdx,_edgeAttr
 
     def createDataset(self):

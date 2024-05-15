@@ -100,6 +100,7 @@ def main(_):
 
     FTG = data.FTGenerator(paraDict,metadata)
     Dataset, metadata = FTG.createDataset()
+    #print(Dataset)
     nNodes = Dataset[0].x.shape[0]
     nClass = metadata['nClass']
     print (f"Number of edges {len(Dataset[0].edge_attr)}.")
@@ -211,7 +212,7 @@ def main(_):
                         # 'TPRBest':          TPRBest,
                         'score':            bestScore,
                         }, checkpointPath)
-            print(lossValid,bestScore,accuValid,recallValid,precValid,f1Valid)
+            #print(lossValid,bestScore,accuValid,recallValid,precValid,f1Valid)
             if lossValid < bestScore and FLAGS.saveModel:
                 bestScore = lossValid
                 record = [loss,lossValid,lossTest,accuTrain,accuValid,accuTest,recallTrain,recallValid,recallTest,precTrain,precValid,precTest,f1Train,f1Valid,f1Test,epoch]
@@ -236,6 +237,10 @@ def main(_):
             with open('log','a') as f:
                 print ("",file=f)
     print('Training completed.')
+    
+    #print(        [loss,lossValid,lossTest,accuTrain,accuValid,accuTest,recallTrain,recallValid,recallTest,precTrain,precValid,precTest,f1Train,f1Valid,f1Test,epoch]
+         )
+    
     print(record)
     with open('record','a') as f: print(record,file=f)
     # Plot covergence hist

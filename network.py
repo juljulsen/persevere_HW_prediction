@@ -157,7 +157,9 @@ def train(model,opt,trainLoader,nNodes,scheduler,nClass,lossFn,weights):
     _lossList,_accuList,_recallList,_precList,_f1List = [],[],[],[],[]
     # _loss = 0
     for _batch in trainLoader:
+        #print(np.shape(_batch.x))
         _yHat,_ = model(_batch.x,_batch.edge_index,_batch.edge_attr)
+        #print(model)#(_batch.x,_batch.edge_index,_batch.edge_attr))
         _yHat = _yHat.view(-1,nClass)
         _pred = torch.argmax(_yHat,axis=-1)
         _truth = _batch.y.view(-1)
@@ -176,7 +178,7 @@ def train(model,opt,trainLoader,nNodes,scheduler,nClass,lossFn,weights):
         _recall[torch.isnan(_recall)] = 0.
         _prec[torch.isnan(_prec)] = 0.
         _f1[torch.isnan(_f1)] = 0.
-
+        #print(_yHat,_truth)
         _loss = lossFn(_yHat,_truth)
         _loss.backward(retain_graph=False)
         opt.step()
