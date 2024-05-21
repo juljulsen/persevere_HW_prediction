@@ -1,0 +1,63 @@
+No checkpoint found, starting with new model.
+Model generated
+GAT(
+  (GATLayers): ModuleList(
+    (0): GATv2Conv(32, 32, heads=1)
+    (1): PReLU(num_parameters=32)
+    (2): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (3): GATv2Conv(32, 32, heads=1)
+    (4): PReLU(num_parameters=32)
+    (5): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (encodingLayers): ModuleList(
+    (0): Linear(in_features=56, out_features=32, bias=True)
+    (1): PReLU(num_parameters=32)
+    (2): Linear(in_features=32, out_features=32, bias=True)
+    (3): PReLU(num_parameters=32)
+  )
+  (decodingLayers): ModuleList(
+    (0): Linear(in_features=32, out_features=32, bias=True)
+    (1): Linear(in_features=32, out_features=6, bias=True)
+  )
+)
+./trainedModel/__.pt
+Dataset length (4743, 365, 365).
+{'weights': [0.19876090326902518, 0.8012390967309748], 'varMin': array([   0.        ,  -18.        ,   21.13022989,  -29.8       ,
+        -45.9       ,  -33.4       ,    0.        ,    0.        ,
+        788.5       ,  971.2       ,    1.        , -124.10861   ,
+         25.7881    ,    0.        ]), 'varMax': array([ 1.00000000e+00,  1.17000000e+02,  1.11026667e+02,  1.04900000e+02,
+        9.39000000e+01,  8.13000000e+01,  3.44000000e+01,  1.34300000e+01,
+        1.04190000e+03,  1.05010000e+03,  3.66000000e+02, -6.80173000e+01,
+        4.90252780e+01,  1.00000000e+00]), 'mean': array([ 7.95043613e-02,  6.88157290e+01,  7.45746628e+01,  5.58317254e+01,
+        4.43520076e+01,  4.19905572e+01,  6.95185720e+00,  9.05690166e-02,
+        9.66129250e+02,  1.01636118e+03,  1.83133601e+02, -9.65499021e+01,
+        3.90503806e+01,  0.00000000e+00]), 'std': array([  0.27052434,  20.26900012,  16.8727389 ,  19.28716246,
+        19.11077043,  18.77149996,   3.5961898 ,   0.29794731,
+        54.76594592,   6.8503456 , 105.44347305,  14.93834663,
+         5.64673115,   1.        ]), 'nClass': 2}
+Max recall 52.17% at station 78. Min TPR 10.75% at station 62.
+Recall worst 10 stations tensor([62, 70,  1, 39, 18,  6, 29, 42, 76, 25]).
+Max recall 63.64% at station 5. Min TPR 0.00% at station 45.
+Recall worst 10 stations tensor([45, 27, 24,  3, 19, 30, 39, 33, 63, 12]).
+LR = [0.000998]
+Iter 1 training loss: 0.5667767161681708, validation loss: 0.5920412992826002, test loss: 0.5817740108390058 time:22.99
+Mean training accuracy 60.74%, mean validation accuracy 84.74%, mean test accuracy 85.68%
+Train recall: 86.64%. Validation recall: 31.92%, Test recall: 29.64%
+Train precision: 15.24%. Validation precision: 21.26%, Test precision: 27.97%
+Train f1: 25.87%. Validation f1: 24.77%, Test f1: 28.13%
+
+Model saved, loss: 5.9204130e-01
+
+Max recall 65.93% at station 5. Min TPR 30.00% at station 9.
+Recall worst 10 stations tensor([ 9, 27, 89, 28, 88, 14, 81, 66, 82, 26]).
+Max recall 69.57% at station 35. Min TPR 32.56% at station 9.
+Recall worst 10 stations tensor([ 9, 72, 88,  4,  8, 16, 22, 15, 89, 45]).
+LR = [0.0009801790433519493]
+Iter 10 training loss: 0.273150248930497, validation loss: 0.29033082270400734, test loss: 0.2787158009907459 time:232.31
+Mean training accuracy 90.44%, mean validation accuracy 91.28%, mean test accuracy 90.12%
+Train recall: 65.75%. Validation recall: 50.91%, Test recall: 55.20%
+Train precision: 43.11%. Validation precision: 45.91%, Test precision: 48.61%
+Train f1: 52.02%. Validation f1: 47.67%, Test f1: 51.22%
+
+Model saved, loss: 2.9033082e-01
+

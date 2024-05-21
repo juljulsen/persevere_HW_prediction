@@ -5,6 +5,7 @@ import numpy as np
 import data, network, torch, pickle, time, os
 from torch_geometric.loader import DataLoader as batchLoader
 from absl import app,flags
+import time
 
 flags.DEFINE_integer('num_steps', int(1000), help='Number of steps of training.')
 flags.DEFINE_string('AF', 'PReLUMulti' , help='Choice of activation function.')
@@ -36,6 +37,7 @@ flags.DEFINE_bool('Dropout', False, help='To use dropout or not.')
 FLAGS = flags.FLAGS
 
 def main(_):
+    start_time = time.time()
     if FLAGS.device == 'CPU':
         device = torch.device("cpu")
     if FLAGS.device == 'GPU':
@@ -238,12 +240,14 @@ def main(_):
                 print ("",file=f)
     print('Training completed.')
     
-    #print(        [loss,lossValid,lossTest,accuTrain,accuValid,accuTest,recallTrain,recallValid,recallTest,precTrain,precValid,precTest,f1Train,f1Valid,f1Test,epoch]
-         )
-    
+    #print(        [loss,lossValid,lossTest,accuTrain,accuValid,accuTest,recallTrain,recallValid,recallTest,precTrain,precValid,precTest,f1Train,f1Valid,f1Test,epoch]    )
+    record = [loss,lossValid,lossTest,accuTrain,accuValid,accuTest,recallTrain,recallValid,recallTest,precTrain,precValid,precTest,f1Train,f1Valid,f1Test,epoch] ## add this to try
+
     print(record)
     with open('record','a') as f: print(record,file=f)
     # Plot covergence hist
     network.plotHist(FLAGS.modelName)
+    end_time = time.time()
+    print("Seconds ellapsed:", end_time-start_time)
 if __name__ == '__main__':
   app.run(main)
