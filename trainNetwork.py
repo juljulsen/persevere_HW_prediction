@@ -238,8 +238,7 @@ def main(_):
                 print ("",file=f)
     print('Training completed.')
     
-    #print(        [loss,lossValid,lossTest,accuTrain,accuValid,accuTest,recallTrain,recallValid,recallTest,precTrain,precValid,precTest,f1Train,f1Valid,f1Test,epoch]
-         )
+    #print(        [loss,lossValid,lossTest,accuTrain,accuValid,accuTest,recallTrain,recallValid,recallTest,precTrain,precValid,precTest,f1Train,f1Valid,f1Test,epoch] )
     
     print(record)
     with open('record','a') as f: print(record,file=f)
